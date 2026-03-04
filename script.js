@@ -169,6 +169,59 @@ const carros = [
   "VW GOL - OJU9697",
   "IVECO 130 - OSK7870"
 ];
+/* ================= DETECTAR QR DO VEÍCULO ================= */
+
+async function detectarQRVeiculo() {
+
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("veiculo");
+
+  if (!id) return;
+
+  const carro = carros[id - 1];
+  if (!carro) return;
+
+  // preencher selects automaticamente
+  const selects = [
+    "carroSaida",
+    "carroChegada",
+    "carroAbastecimento",
+    "carroManutencao",
+    "carroLavagem"
+  ];
+
+  selects.forEach(selectId => {
+    const select = document.getElementById(selectId);
+    if (select) select.value = carro;
+  });
+
+  try {
+
+    const response = await fetch(`${URL}?tipo=ROTAS_ABERTAS`);
+    const data = await response.json();
+
+    const rota = data.rotasAbertas.find(r => r.carro === carro);
+
+    if (rota) {
+
+      trocarTela("rotas");
+      mostrarAba("chegada");
+
+      mostrarToast("🚗 Veículo com rota aberta. Registrar chegada.");
+
+    } else {
+
+      trocarTela("rotas");
+      mostrarAba("saida");
+
+      mostrarToast("🚗 Registrar saída do veículo.");
+
+    }
+
+  } catch {
+    console.log("Erro ao verificar rotas abertas");
+  }
+}
 
 /* ================= Toast ================= */
 
@@ -219,13 +272,11 @@ async function enviar(tipo, dados) {
 /* ================= INICIALIZAÇÃO ================= */
 document.addEventListener("DOMContentLoaded", async () => {
 
-
   /* ================= RESTAURA LOGIN ================= */
 
   const salvo = localStorage.getItem("usuarioLogado");
   const emailSalvo = localStorage.getItem("emailLogado");
   if (salvo) iniciarSistema(salvo, emailSalvo);
-
 
   /* ================= POPULAR VEÍCULOS ================= */
 
@@ -240,8 +291,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   });
 
+  /* ================= DETECTAR QR ================= */
 
+  detectarQRVeiculo();
 
+});
  
 /* ================= PREVENTIVA  ================= */
 
@@ -525,5 +579,4 @@ if ("serviceWorker" in navigator) {
 document.addEventListener("DOMContentLoaded", () => {
   document.body.classList.remove("menu-open");
   document.body.style.overflow = "auto";
-});
 });
