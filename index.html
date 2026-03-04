@@ -1,0 +1,293 @@
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Controle de Frota</title>
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1f2d3d">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+ 
+<!-- 🔐 TELA DE LOGIN -->
+<div id="loginScreen" style="
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:#f4f6f9;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+">
+  <div style="
+    background:white;
+    padding:50px;
+    border-radius:16px;
+    box-shadow:0 20px 50px rgba(0,0,0,0.15);
+    width:550px;
+    max-width:90%;
+    text-align:center;
+  ">
+  <!-- inicio -->
+    <h2 style="font-size:26px; margin-bottom:30px;">
+      Login - Controle de Frota
+    </h2>
+
+    <input type="email" id="emailLogin"
+           placeholder="Digite seu email"
+           style="width:100%; padding:14px; margin:15px 0; font-size:16px;">
+
+    <input type="password" id="senhaLogin"
+           placeholder="Digite sua senha"
+           style="width:100%; padding:14px; margin:15px 0; font-size:16px;">
+
+    <button onclick="fazerLogin()"
+            style="width:100%; padding:14px; font-size:16px;">
+      Entrar
+    </button>
+
+    <p id="erroLogin" style="color:red; margin-top:15px;"></p>
+  </div>
+</div>
+
+<!--  SISTEMA -->
+<div class="layout" id="sistema" style="display:none;">
+
+  <!-- BOTÃO MOBILE -->
+  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+  <!-- MENU LATERAL -->
+  <div class="menu-lateral">
+
+    <!--  HEADER MOBILE -->
+    <div class="menu-header">
+      <div class="avatar" id="avatarUsuario"></div>
+      <div class="user-info">
+        <strong id="nomeUsuario">Usuário</strong>
+        <small id="emailUsuario">email@email.com</small>
+      </div>
+    </div>
+
+    <!-- ITENS DO MENU -->
+    <div class="menu-items">
+
+      <button onclick="logout()" style="margin-bottom:15px;">Sair</button>
+
+      <button class="menu-btn active"
+              onclick="trocarTela('rotas', event)">
+        Rotas
+      </button>
+
+      <button class="menu-btn"
+              onclick="trocarTela('abastecimento', event)">
+        Abastecimento
+      </button>
+
+      <button class="menu-btn"
+              onclick="trocarTela('lavagem', event)">
+        Lavagem
+      </button>
+
+      <button class="menu-btn"
+              onclick="trocarTela('manutencao', event)">
+        Manutenção
+      </button>
+
+      <button id="btnLooker"
+              class="menu-btn"
+              onclick="abrirLooker()"
+              style="display:none;">
+        Painel Gerencial
+      </button>
+
+    </div>
+  </div>
+
+  <!-- OVERLAY -->
+  <div class="overlay" onclick="toggleMenu()"></div>
+
+  <!-- CONTAINER -->
+  <div class="container">
+    <div class="card">
+
+      <!-- ROTAS -->
+      <div id="rotas" class="conteudo ativo">
+        <h2>Controle de Rotas</h2>
+
+        <div class="tabs">
+          <button class="tab active"
+                  onclick="mostrarAba('saida', event)">
+            Saída
+          </button>
+          <button class="tab"
+                  onclick="mostrarAba('chegada', event)">
+            Chegada
+          </button>
+        </div>
+
+        <div id="saida" class="aba ativa">
+          <form id="formSaida">
+            <select name="motorista" id="motoristaSaida" required></select>
+            <select name="carro" id="carroSaida" required></select>
+
+            <select name="regiao" required>
+              <option value="">Região</option>
+              <option>CAPITAL - FOR</option>
+              <option>INTERIOR - CE</option>
+              <option>CAPITAL - PI</option>
+              <option>INTERIOR - PI</option>
+            </select>
+
+            <select name="tipoServico" required>
+              <option value="">Tipo de Serviço</option>
+              <option value="COLETA">Coleta</option>
+              <option value="REVERSA">Entrega</option>
+              <option value="Coleta-Entrega">Coleta-Entrega</option>
+              <option value="VIAGEM">Viagem</option>
+              <option value="ALMOCO">Almoço</option>
+              <option value="MANUTENCAO">Manutenção</option>
+              <option value="LAVAGEM">Lavagem</option>
+              <option value="ABASTECIMENTO">Abastecimento</option>
+            </select>
+
+            <input type="number" name="km" placeholder="KM Saída" step="any" inputmode="decimal" required>
+            <button type="submit">Registrar Saída</button>
+          </form>
+        </div>
+
+        <div id="chegada" class="aba">
+          <form id="formChegada">
+            <select name="motorista" id="motoristaChegada" required></select>
+            <select name="carro" id="carroChegada" required></select>
+            <input type="number" name="km" placeholder="KM Chegada" step="any" inputmode="decimal" required>
+            <button type="submit">Registrar Chegada</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- ABASTECIMENTO -->
+      <div id="abastecimento" class="conteudo">
+        <h2>Abastecimento</h2>
+        <form id="formAbastecimento">
+          <select name="motorista" id="motoristaAbastecimento" required></select>
+          <select name="carro" id="carroAbastecimento" required></select>
+          <input type="number" name="litros" placeholder="Litros" step="0.01" required>
+          <input type="number" name="valor" placeholder="Valor (R$)" step="0.01" required>
+          <button type="submit">Registrar Abastecimento</button>
+        </form>
+      </div>
+
+      <!-- LAVAGEM -->
+      <div id="lavagem" class="conteudo">
+        <h2>Lavagem</h2>
+        <form id="formLavagem">
+          <select name="motorista" id="motoristaLavagem" required></select>
+          <select name="carro" id="carroLavagem" required></select>
+          <input type="date" name="data" required>
+          <input type="number" name="valor"
+                 placeholder="Valor da Lavagem (R$)"
+                 step="0.01" required>
+          <button type="submit">Registrar Lavagem</button>
+        </form>
+      </div>
+
+      <!-- MANUTENÇÃO -->
+      <div id="manutencao" class="conteudo">
+        <h2>Manutenção</h2>
+        <form id="formManutencao">
+          <select name="motorista" id="motoristaManutencao" required></select>
+          <select name="carro" id="carroManutencao" required></select>
+
+          <select name="tipoPreventiva" id="tipoPreventiva" required>
+            <option value="">Tipo de manutenção</option>
+            <option value="OLEO">Troca de óleo</option>
+            <option value="PNEU">Troca de pneu</option>
+            <option value="VELA">Troca de vela</option>
+            <option value="FREIO">Freio</option>
+            <option value="MOTOR">Motor</option>
+            <option value="EMBREAGEM">Embreagem</option>
+            <option value="PARTE ELETRICA">Parte elétrica</option>
+          </select>
+
+          <!-- POSIÇÃO DO PNEU -->
+<div id="grupoPneus" class="grupo-pneus" style="display:none;">
+  <!-- TIPO DE REPARO DO PNEU -->
+<div id="tipoReparoPneu" style="display:none; margin-top:10px;">
+
+  <label>Tipo de serviço no pneu:</label>
+
+  <select name="tipoReparo">
+    <option value="">Selecione</option>
+    <option value="TROCA">Troca de pneu</option>
+    <option value="VULCANIZACAO">Vulcanização</option>
+    <option value="MACARRAO">Reparo com macarrão</option>
+  </select>
+
+</div>
+
+  <p class="titulo-pneus">Selecione os pneus trocados:</p>
+
+  <div class="pneus-grid">
+
+    <label class="pneu-item">
+      <input type="checkbox" name="posicaoPneu" value="DD">
+      <span>DD</span>
+      <small>Dianteiro Direito</small>
+    </label>
+
+    <label class="pneu-item">
+      <input type="checkbox" name="posicaoPneu" value="DE">
+      <span>DE</span>
+      <small>Dianteiro Esquerdo</small>
+    </label>
+
+    <label class="pneu-item">
+      <input type="checkbox" name="posicaoPneu" value="TD">
+      <span>TD</span>
+      <small>Traseiro Direito</small>
+    </label>
+
+    <label class="pneu-item">
+      <input type="checkbox" name="posicaoPneu" value="TE">
+      <span>TE</span>
+      <small>Traseiro Esquerdo</small>
+    </label>
+
+    <label class="pneu-item">
+      <input type="checkbox" name="posicaoPneu" value="STEP">
+      <span>STEP</span>
+      <small>Estepe</small>
+    </label>
+
+  </div>
+</div>
+
+          <input type="text" name="km" placeholder="KM Atual" step="any" inputmode="decimal" required>
+          <input type="text" name="valor" placeholder="Valor (R$)" step="0.01" required>
+          <input type="text" name="descricao" placeholder="Descrição da manutenção" required>
+
+          <input type="text" name="kmProximaTroca"
+                 id="kmProximaTroca"
+                 placeholder="KM  (ex: 5000km)"
+                 style="display:none;"
+                >
+
+          <button type="submit">Registrar Manutenção</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="toastContainer" class="toast-container"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

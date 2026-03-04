@@ -1,0 +1,517 @@
+/* 🔒 ESCONDE HEADER NO DESKTOP */
+.menu-header {
+  display: none;
+}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #eef1f5;
+  color: #2c3e50;
+}
+
+
+.layout {
+  display: flex;
+  min-height: 100%;
+}
+
+
+
+.menu-lateral {
+  width: 220px;
+  background: #1f2d3d;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  color: #cfd8dc;
+  height: 55px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border-left: 4px solid transparent;
+  width: auto;
+}
+
+.menu-btn:hover {
+  background: #263445;
+  color: white;
+}
+
+.menu-btn.active {
+  background: #263445;
+  color: white;
+  border-left: 4px solid #4CAF50;
+}
+
+
+
+.container {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* nunca center */
+}
+
+
+
+.card {
+  position: relative;
+  width: 550px;  
+  padding: 50px;  
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(4px);
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("logo.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 60%;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+
+
+.card h2 {
+  margin-top: 0;
+  font-weight: 600;
+  text-align: center;
+  font-size: 24px;      
+  margin-bottom: 30px;
+}
+
+
+
+.tabs {
+  display: flex;
+  margin-bottom: 25px;
+  background: #f2f4f7;
+  border-radius: 8px;
+  padding: 5px;
+}
+
+.tab {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 500;
+  color: #555;
+  transition: 0.2s;
+}
+
+.tab.active {
+  background: white;
+  color: #2c3e50;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+}
+
+
+
+select,
+input {
+  width: 100%;
+  padding: 14px 16px;  
+  margin-bottom: 18px;
+  border-radius: 8px;
+  border: 1px solid #c5cbd3;          
+  background: #e9edf2;                
+  font-size: 15px;
+  transition: 0.2s;
+  color: #1a1a1a;
+  font-weight: 500;
+}
+
+
+.usuario-logado {
+  color: #000;
+  font-weight: 700;
+}
+
+select:focus,
+input:focus {
+  outline: none;
+  border-color: #4CAF50;
+  background: #ffffff;                
+}
+
+select option {
+  color: #000;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  border: none;
+  background: #4CAF50;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #43a047;
+}
+
+
+.aba,
+.conteudo {
+  display: none;
+}
+
+.aba.ativa,
+.conteudo.ativo {
+  display: block;
+}
+
+
+
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast {
+  width: auto;
+  max-width: 240px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  color: white;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toast.success {
+  background-color: #2ecc71;
+}
+
+.toast.error {
+  background-color: #e74c3c;
+}
+
+.toast button {
+  background: none;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+body.menu-open {
+  overflow: hidden;
+}
+
+.container {
+  overflow-y: auto;
+}
+.menu-toggle {
+  display: none;
+}
+
+.menu-lateral {
+  overflow-y: auto;
+}
+
+.menu-lateral button:first-child {
+  margin-bottom: 20px;
+}
+
+.menu-btn {
+  height: 50px;
+
+}
+@media (max-width: 768px) {
+body {
+  min-height: 100vh;
+}
+   .layout {
+    flex-direction: column;
+  }
+  /* BOTÃO HAMBURGUER */
+  .menu-toggle {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 10001;
+    background: #1f2d3d;
+    color: white;
+    border: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+   .menu-lateral {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    width: 260px;
+    height: 100dvh; /* 🔥 melhor que 100vh no mobile */
+    background: #1f2d3d;
+    flex-direction: column;
+    transition: left 0.3s ease;
+    z-index: 10000;
+    padding-top: 0;
+    overflow-y: auto;
+  }
+
+  .menu-lateral.open {
+    left: 0;
+  }
+
+  /* ===== HEADER DO MENU ===== */
+  .menu-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: white;
+  }
+ .avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-bottom: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+  position: relative;
+}
+
+/* 🟢 BOLINHA ONLINE */
+.avatar::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 14px;
+  height: 14px;
+  background: #2ecc71;
+  border: 2px solid white;
+  border-radius: 50%;
+}
+
+  .user-info strong {
+    font-size: 16px;
+  }
+
+  .user-info small {
+    font-size: 12px;
+    opacity: 0.9;
+  }
+
+  /* MENU ITEMS */
+  .menu-lateral button {
+    height: 55px;
+  }
+
+  .menu-lateral button:first-child {
+    margin-top: 15px;
+  }
+
+  /* OVERLAY */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+    z-index: 9999;
+  }
+
+  .overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+     .container {
+    padding: 20px;
+    padding-top: 80px;
+  }
+
+   .card {
+    width: 100%;
+    padding: 30px;
+    margin-top: 10px;
+  }
+    body {
+    overflow-y: auto;
+  }
+}
+/* ===== BOTÃO LOADING ===== */
+
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+button.loading {
+  position: relative;
+  pointer-events: none;
+  color: transparent;
+}
+
+button.loading::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(255,255,255,0.4);
+  border-top: 3px solid #fff;
+  border-radius: 50%;
+  animation: btnSpin 0.8s linear infinite;
+}
+
+@keyframes btnSpin {
+  to { transform: rotate(360deg); }
+}
+.grupo-pneus {
+  margin-bottom: 25px;
+}
+
+.titulo-pneus {
+  font-weight: 600;
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #444;
+}
+
+.pneus-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.pneu-item {
+  position: relative;
+  background: #f4f6f9;
+  padding: 14px;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.pneu-item input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pneu-item span {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.pneu-item small {
+  display: block;
+  font-size: 11px;
+  color: #666;
+  margin-top: 4px;
+}
+
+/* 🔥 Quando selecionado */
+.pneu-item input:checked + span {
+  color: #4CAF50;
+}
+
+
+.pneu-item:has(input:checked) {
+  border-color: #4CAF50;
+  background: #e8f5e9;
+}
+html, body {
+  overflow-x: hidden;
+}
+.campo-observacao {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.campo-observacao label {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.campo-observacao textarea {
+  width: 100%;
+  min-height: 90px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #dcdcdc;
+  font-size: 14px;
+  resize: none;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.campo-observacao textarea:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15);
+  outline: none;
+}
+
+.campo-observacao small {
+  text-align: right;
+  font-size: 11px;
+  color: #888;
+  margin-top: 4px;
+}
