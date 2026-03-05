@@ -1,5 +1,4 @@
 const URL = "/api/proxy";
-
 let usuarioLogado = null;
 let emailLogado = null;
 
@@ -173,44 +172,56 @@ const carros = [
   "IVECO 130 - OSK7870"
 ];
 /* ================= DETECTAR QR DO VEÍCULO ================= */
-function detectarQRVeiculo(){
+function identificarVeiculo(){
 
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get("veiculo");
+const id = document.getElementById("inputVeiculoQR").value.trim();
 
-  if(!id) return;
+if(!id) return;
 
-  const carro = carros[id - 1];
-  if(!carro) return;
+const carro = carros[id - 1];
 
-  const selects = [
-    "carroSaida",
-    "carroChegada",
-    "carroAbastecimento",
-    "carroManutencao",
-    "carroLavagem"
-  ];
+if(!carro){
+mostrarToast("Veículo não encontrado","error");
+return;
+}
 
-  selects.forEach(selectId => {
+const selects = [
+"carroSaida",
+"carroChegada",
+"carroAbastecimento",
+"carroManutencao",
+"carroLavagem"
+];
 
-    const select = document.getElementById(selectId);
-    if(!select) return;
+selects.forEach(selectId => {
 
-    // limpa opções
-    select.innerHTML = "";
+const select = document.getElementById(selectId);
+if(!select) return;
 
-    // cria opção única
-    const option = document.createElement("option");
-    option.value = carro;
-    option.textContent = carro;
-    option.selected = true;
+select.value = carro;
+select.disabled = true;
 
-    select.appendChild(option);
+});
 
-    // trava o campo
-    select.disabled = true;
+}
 
-  });
+/* ================= abrir camera ================= */
+function abrirCameraQR(){
+
+const scanner = new Html5QrcodeScanner(
+"reader",
+{ fps: 10, qrbox: 250 }
+);
+
+scanner.render((decodedText) => {
+
+document.getElementById("inputVeiculoQR").value = decodedText;
+
+identificarVeiculo();
+
+scanner.clear();
+
+});
 
 }
 /* ================= Toast ================= */
@@ -260,7 +271,7 @@ async function enviar(tipo, dados) {
 }
 
 /* ================= INICIALIZAÇÃO ================= */
-ddocument.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", async () => {
 
   const params = new URLSearchParams(window.location.search);
   const veiculoQR = params.get("veiculo");

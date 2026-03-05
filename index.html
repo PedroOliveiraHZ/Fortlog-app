@@ -120,22 +120,41 @@
       <div id="rotas" class="conteudo ativo">
         <h2>Controle de Rotas</h2>
 
-        <div class="tabs">
-          <button class="tab active"
-                  onclick="mostrarAba('saida', event)">
-            Saída
-          </button>
-          <button class="tab"
-                  onclick="mostrarAba('chegada', event)">
-            Chegada
-          </button>
-        </div>
+      <div class="tabs">
+  <button class="tab active" onclick="mostrarAba('saida', event)">
+    Saída
+  </button>
 
-        <div id="saida" class="aba ativa">
-          <form id="formSaida">
-            <select name="motorista" id="motoristaSaida" required></select>
-            <select name="carro" id="carroSaida" required></select>
+  <button class="tab" onclick="mostrarAba('chegada', event)">
+    Chegada
+  </button>
+</div>
+    
+      <div id="saida" class="aba ativa">
+<form id="formSaida">
 
+<select name="motorista" id="motoristaSaida" required></select>
+
+<!-- CAMPO QR -->
+<div style="margin-bottom:10px;">
+
+<input
+type="number"
+id="inputVeiculoQR"
+placeholder="Escaneie QR ou digite ID do veículo"
+oninput="identificarVeiculo()"
+style="width:100%; padding:12px;"
+>
+
+<button type="button" onclick="abrirCameraQR()" style="margin-top:5px;">
+📷 Ler QR Code
+</button>
+
+<div id="reader" style="margin-top:10px;"></div>
+
+</div>
+
+<select name="carro" id="carroSaida" required></select>
             <select name="regiao" required>
               <option value="">Região</option>
               <option>CAPITAL - FOR</option>
@@ -287,7 +306,7 @@
 </div>
 
 <div id="toastContainer" class="toast-container"></div>
-
+<script src="https://unpkg.com/html5-qrcode"></script>
 <script src="script.js"></script>
 </body>
 </html>
