@@ -76,14 +76,13 @@ function gerarCorPorInicial(letra) {
 
 /* ================= iniciar sistema ================= */
 function iniciarSistema(nome, email) {
+
   usuarioLogado = nome;
   emailLogado = email || localStorage.getItem("emailLogado");
 
- 
   document.getElementById("nomeUsuario").innerText = nome;
   document.getElementById("emailUsuario").innerText = emailLogado;
 
- 
   const inicial = nome.trim().charAt(0).toUpperCase();
   document.getElementById("avatarUsuario").innerText = inicial;
 
@@ -95,6 +94,10 @@ function iniciarSistema(nome, email) {
   document.getElementById("sistema").style.display = "flex";
 
   travarMotoristas(nome);
+
+  /* 🔥 ADICIONE ESTA LINHA */
+  detectarQRVeiculo();
+
 }
 
 /* ================= trava motorista ================= */
@@ -291,11 +294,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   });
 
-  /* ================= DETECTAR QR ================= */
-
-  detectarQRVeiculo();
-
-});
  
 /* ================= PREVENTIVA  ================= */
 
@@ -580,3 +578,4 @@ document.addEventListener("DOMContentLoaded", () => {
   document.body.classList.remove("menu-open");
   document.body.style.overflow = "auto";
 });
+  });
