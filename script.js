@@ -194,14 +194,19 @@ function detectarQRVeiculo(){
     const select = document.getElementById(selectId);
     if(!select) return;
 
-    for(let option of select.options){
+    // limpa opções
+    select.innerHTML = "";
 
-      if(option.value === carro){
-        option.selected = true;
-        break;
-      }
+    // cria opção única
+    const option = document.createElement("option");
+    option.value = carro;
+    option.textContent = carro;
+    option.selected = true;
 
-    }
+    select.appendChild(option);
+
+    // trava o campo
+    select.disabled = true;
 
   });
 
