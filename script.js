@@ -95,8 +95,6 @@ function iniciarSistema(nome, email) {
 
   travarMotoristas(nome);
 
-  /* 🔥 ADICIONE ESTA LINHA */
-  detectarQRVeiculo();
 
 }
 
@@ -262,19 +260,35 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (salvo) iniciarSistema(salvo, emailSalvo);
 
   /* ================= POPULAR VEÍCULOS ================= */
+/* ================= POPULAR VEÍCULOS ================= */
 
-  ["carroSaida","carroChegada","carroAbastecimento","carroManutencao","carroLavagem"]
-  .forEach(id => {
-    const select = document.getElementById(id);
-    if (!select) return;
+const params = new URLSearchParams(window.location.search);
+const veiculoQR = params.get("veiculo");
 
-    select.innerHTML = `<option value="">Selecione Veículo</option>`;
-    carros.forEach(carro => {
-      select.innerHTML += `<option value="${carro}">${carro}</option>`;
-    });
+["carroSaida","carroChegada","carroAbastecimento","carroManutencao","carroLavagem"]
+.forEach(id => {
+
+  const select = document.getElementById(id);
+  if (!select) return;
+
+  select.innerHTML = `<option value="">Selecione Veículo</option>`;
+
+  carros.forEach((carro, index) => {
+
+    const selected = veiculoQR == (index + 1) ? "selected" : "";
+
+    select.innerHTML += `
+      <option value="${carro}" ${selected}>
+        ${carro}
+      </option>
+    `;
+
   });
 
- 
+});
+
+/* 🔥 AGORA CHAMA O QR */
+detectarQRVeiculo();
 /* ================= PREVENTIVA  ================= */
 
 const tipoPreventiva = document.getElementById("tipoPreventiva");
