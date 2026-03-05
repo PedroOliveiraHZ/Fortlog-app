@@ -95,6 +95,8 @@ function iniciarSistema(nome, email) {
 
   travarMotoristas(nome);
 
+  // 🔥 ADICIONE AQUI
+  detectarQRVeiculo();
 
 }
 
@@ -258,7 +260,7 @@ async function enviar(tipo, dados) {
 }
 
 /* ================= INICIALIZAÇÃO ================= */
-document.addEventListener("DOMContentLoaded", async () => {
+ddocument.addEventListener("DOMContentLoaded", async () => {
 
   const params = new URLSearchParams(window.location.search);
   const veiculoQR = params.get("veiculo");
@@ -285,16 +287,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   });
 
-  detectarQRVeiculo();
-
   const salvo = localStorage.getItem("usuarioLogado");
   const emailSalvo = localStorage.getItem("emailLogado");
 
   if (salvo) iniciarSistema(salvo, emailSalvo);
 
 });
-
-
 /* ================= PREVENTIVA  ================= */
 
 const tipoPreventiva = document.getElementById("tipoPreventiva");
