@@ -174,56 +174,36 @@ const carros = [
 ];
 /* ================= DETECTAR QR DO VEÍCULO ================= */
 
-async function detectarQRVeiculo() {
+async function detectarQRVeiculo(){
 
   const params = new URLSearchParams(window.location.search);
   const id = params.get("veiculo");
 
-  if (!id) return;
+  if(!id) return;
 
   const carro = carros[id - 1];
-  if (!carro) return;
+  if(!carro) return;
 
-  // preencher selects automaticamente
-  const selects = [
-    "carroSaida",
-    "carroChegada",
-    "carroAbastecimento",
-    "carroManutencao",
-    "carroLavagem"
-  ];
+  // esperar selects existirem
+  setTimeout(() => {
 
-  selects.forEach(selectId => {
-    const select = document.getElementById(selectId);
-    if (select) select.value = carro;
-  });
+    const selects = [
+      "carroSaida",
+      "carroChegada",
+      "carroAbastecimento",
+      "carroManutencao",
+      "carroLavagem"
+    ];
 
-  try {
+    selects.forEach(selectId => {
+      const select = document.getElementById(selectId);
+      if(select){
+        select.value = carro;
+      }
+    });
 
-    const response = await fetch(`${URL}?tipo=ROTAS_ABERTAS`);
-    const data = await response.json();
+  }, 300);
 
-    const rota = data.rotasAbertas.find(r => r.carro === carro);
-
-    if (rota) {
-
-      trocarTela("rotas");
-      mostrarAba("chegada");
-
-      mostrarToast("🚗 Veículo com rota aberta. Registrar chegada.");
-
-    } else {
-
-      trocarTela("rotas");
-      mostrarAba("saida");
-
-      mostrarToast("🚗 Registrar saída do veículo.");
-
-    }
-
-  } catch {
-    console.log("Erro ao verificar rotas abertas");
-  }
 }
 
 /* ================= Toast ================= */
