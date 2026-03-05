@@ -171,8 +171,7 @@ const carros = [
   "IVECO 130 - OSK7870"
 ];
 /* ================= DETECTAR QR DO VEÍCULO ================= */
-
-async function detectarQRVeiculo(){
+function detectarQRVeiculo(){
 
   const params = new URLSearchParams(window.location.search);
   const id = params.get("veiculo");
@@ -182,28 +181,31 @@ async function detectarQRVeiculo(){
   const carro = carros[id - 1];
   if(!carro) return;
 
-  // esperar selects existirem
-  setTimeout(() => {
+  const selects = [
+    "carroSaida",
+    "carroChegada",
+    "carroAbastecimento",
+    "carroManutencao",
+    "carroLavagem"
+  ];
 
-    const selects = [
-      "carroSaida",
-      "carroChegada",
-      "carroAbastecimento",
-      "carroManutencao",
-      "carroLavagem"
-    ];
+  selects.forEach(selectId => {
 
-    selects.forEach(selectId => {
-      const select = document.getElementById(selectId);
-      if(select){
-        select.value = carro;
+    const select = document.getElementById(selectId);
+    if(!select) return;
+
+    for(let option of select.options){
+
+      if(option.value === carro){
+        option.selected = true;
+        break;
       }
-    });
 
-  }, 300);
+    }
+
+  });
 
 }
-
 /* ================= Toast ================= */
 
 function mostrarToast(mensagem, tipo = "success") {
@@ -259,7 +261,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   const emailSalvo = localStorage.getItem("emailLogado");
   if (salvo) iniciarSistema(salvo, emailSalvo);
 
-  /* ================= POPULAR VEÍCULOS ================= */
 /* ================= POPULAR VEÍCULOS ================= */
 
 const params = new URLSearchParams(window.location.search);
