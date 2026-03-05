@@ -174,9 +174,16 @@ const carros = [
 /* ================= DETECTAR QR DO VEÍCULO ================= */
 function identificarVeiculo(){
 
-const id = document.getElementById("inputVeiculoQR").value.trim();
+let id = document.getElementById("inputVeiculoQR").value.trim();
 
 if(!id) return;
+
+// se vier URL do QR
+if(id.includes("veiculo=")){
+  id = id.split("veiculo=")[1];
+}
+
+id = parseInt(id);
 
 const carro = carros[id - 1];
 
