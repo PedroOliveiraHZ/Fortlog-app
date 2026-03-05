@@ -94,8 +94,7 @@ function iniciarSistema(nome, email) {
 
   travarMotoristas(nome);
 
-  // 🔥 ADICIONE AQUI
-  detectarQRVeiculo();
+
 
 }
 
@@ -113,7 +112,7 @@ function travarMotoristas(nome) {
     const select = document.getElementById(id);
     if (!select) return;
     select.innerHTML = `<option value="${nome}">${nome}</option>`;
-    select.disabled = true;
+    select.setAttribute("data-travado","true");
   });
 }
 
@@ -178,7 +177,7 @@ let id = document.getElementById("inputVeiculoQR").value.trim();
 
 if(!id) return;
 
-// se vier URL do QR
+// extrair ID do QR
 if(id.includes("veiculo=")){
   id = id.split("veiculo=")[1];
 }
@@ -192,6 +191,7 @@ mostrarToast("Veículo não encontrado","error");
 return;
 }
 
+// atualizar todos selects
 const selects = [
 "carroSaida",
 "carroChegada",
@@ -205,10 +205,20 @@ selects.forEach(selectId => {
 const select = document.getElementById(selectId);
 if(!select) return;
 
+// garantir que opção existe
+if(!select.querySelector(`option[value="${carro}"]`)){
+const option = document.createElement("option");
+option.value = carro;
+option.textContent = carro;
+select.appendChild(option);
+}
+
 select.value = carro;
 select.disabled = true;
 
 });
+
+mostrarToast("🚚 Veículo identificado");
 
 }
 
@@ -225,6 +235,7 @@ scanner.render((decodedText) => {
 document.getElementById("inputVeiculoQR").value = decodedText;
 
 identificarVeiculo();
+
 
 scanner.clear();
 
