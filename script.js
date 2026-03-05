@@ -214,7 +214,10 @@ select.appendChild(option);
 }
 
 select.value = carro;
-select.disabled = true;
+
+// trava visualmente sem desabilitar
+select.style.pointerEvents = "none";
+select.style.opacity = "0.7";
 
 });
 
@@ -366,7 +369,7 @@ document.getElementById("formSaida")?.addEventListener("submit", async e => {
   try {
 
     const f = new FormData(e.target);
-    const carro = f.get("carro");
+    const carro = document.getElementById("carroSaida").value;
     const km = Number(f.get("km"));
 
     if (!carro) {
@@ -412,7 +415,7 @@ document.getElementById("formChegada")?.addEventListener("submit", async e => {
   try {
 
     const f = new FormData(e.target);
-    const carro = f.get("carro");
+   const carro = document.getElementById("carroChegada").value;
     const km = Number(f.get("km"));
 
     if (!carro) {
@@ -464,7 +467,7 @@ document.getElementById("formAbastecimento")?.addEventListener("submit", async e
 
     const resposta = await enviar("ABASTECIMENTO", {
       motorista: usuarioLogado,
-      carro: f.get("carro"),
+     carro: document.getElementById("carroAbastecimento").value,
       litros: f.get("litros"),
       valor: f.get("valor")
     });
@@ -519,7 +522,7 @@ document.getElementById("formManutencao")?.addEventListener("submit", async e =>
 
     const resposta = await enviar("MANUTENCAO", {
   motorista: usuarioLogado,
-  carro: f.get("carro"),
+ carro: document.getElementById("carroManutencao").value,
   km: f.get("km"),
   valor: f.get("valor"),
   descricao: f.get("descricao"),
@@ -554,7 +557,7 @@ document.getElementById("formLavagem")?.addEventListener("submit", async e => {
   try {
 
     const f = new FormData(e.target);
-    const carro = f.get("carro");
+   const carro = document.getElementById("carroLavagem").value;
     const valor = Number(f.get("valor"));
     const descricao = f.get("descricao");
 
