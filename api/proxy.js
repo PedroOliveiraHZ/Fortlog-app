@@ -5,7 +5,7 @@ export const config = {
 };
 
 export default async function handler(req, res) {
-  const BASE_URL = "https://script.google.com/macros/s/AKfycby5WjwrLJLwtVYoZm0cw9ZSY5huaDQar-JKO5JNoxZ_AEuZQcH8LMZxhpyy4fFmz9nonw/exec";
+  const BASE_URL = "https://script.google.com/macros/s/AKfycbya-ldjTICZMH4J009ZWjVnHUuH2m554ZbhjrWCO911BtoyR-vV0951O5oV1OBL2_Jd/exec";
 
   try {
 
