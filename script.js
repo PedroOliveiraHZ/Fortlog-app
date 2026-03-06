@@ -16,10 +16,10 @@ function setLoading(button, isLoading) {
 }
 
 const admins = [
-  "cerqueira@fortsat.com.br",
-  "bruno@fortsat.com.br",
-  "igor@fortsat.com.br",
-  "henrique@fortsunbrasil.com"
+  "user1@gmail.com",
+  "user2@gmail.com",
+  "user3@gmail.com",
+  "user@gmail.com"
 ];
 
 /* ================= LOGIN ================= */
@@ -33,19 +33,19 @@ function fazerLogin() {
   }
 
   const usuarios = {
-    "cerqueira@fortsat.com.br": "CERQUEIRA",
-    "bruno@fortsat.com.br": "BRUNO",
-    "igor@fortsat.com.br": "PEDRO IGOR",
-    "moraiselisergio@gmail.com": "ELISERGIO MORAIS",
-    "jonathansousa0648@gmail.com": "FRANCISCO JONATHAN",
-    "menezesrafael758@gmail.com": "RAFAEL MENEZES",
-    "pedrorafael@fortsat.com.br": "PEDRO THE",
-    "valdeniofilho05@gmail.com": "ANTONIO VALDENIO",
-    "daniel@fortsat.com.br": "DANIEL FORTSAT",
-    "georgiercles.190@gmail.com": "GEORGERCLES HONORIO",
-    "marciocarvalho1512@gmail.com": "MARCIO THE",
-    "marciosampaioslc@gmail.com": "MÁRCIO SAMPAIO",
-    "henrique@fortsunbrasil.com": "HENRIQUE"
+    "user1@gmail.com": "CERQUEIRA",
+    "user2@gmail.com": "BRUNO",
+    "user3@gmail.com": "PEDRO IGOR",
+    "user4@gmail.com": "ELISERGIO MORAIS",
+    "user5@gmail.com": "FRANCISCO JONATHAN",
+    "user6@gmail.com": "RAFAEL MENEZES",
+    "user7@gmail.com": "PEDRO THE",
+    "user8@gmail.com": "ANTONIO VALDENIO",
+    "user9@gmail.com": "DANIEL FORTSAT",
+    "user10@gmail.com": "GEORGERCLES HONORIO",
+    "user11@gmail.com": "MARCIO THE",
+    "user12@gmail.com": "MÁRCIO SAMPAIO",
+    "user@gmail.com": "HENRIQUE"
   };
 
   if (!usuarios[email]) {
@@ -159,16 +159,16 @@ function mostrarAba(id, event) {
 /* ================= CARROS ================= */
 
 const carros = [
-  "FIAT/FIORINO - SBH4H88",
-  "PAJERO LUCIANO - OCG8657",
-  "M.BENZ 1016 - POI6D09",
-  "M.BENZ FURGÃO - POS3A77",
-  "M.BENZ 815 THE - RIJOE17",
-  "M.BENZ 815 VERMELHO - RQZ6F04",
-  "M.BENZ FURGÃO - SBT0D15",
-  "M.BENZ 817 - SOC4J52",
-  "VW GOL - OJU9697",
-  "IVECO 130 - OSK7870"
+  "FIAT/FIORINO ",
+  "PAJERO SPORT",
+  "M.BENZ 1016 ",
+  "M.BENZ FURGÃO ",
+  "M.BENZ 815 THE ",
+  "M.BENZ 815 VERMELHO ",
+  "M.BENZ FURGÃO ",
+  "M.BENZ 817 ",
+  "VW GOL ",
+  "IVECO 130 "
 ];
 /* ================= DETECTAR QR DO VEÍCULO ================= */
 function identificarVeiculo(){
