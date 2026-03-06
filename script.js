@@ -159,18 +159,18 @@ function mostrarAba(id, event) {
 /* ================= CARROS ================= */
 
 const carros = [
-  "FIAT/FIORINO - BRA2D47",
-  "PAJERO SPORT - KLM8F21",
-  "M.BENZ 1016 - QWE3J59",
-  "M.BENZ FURGÃO - ZTR6A18",
-  "M.BENZ 815 THE - HNP4K73",
-  "M.BENZ 815 VERMELHO - LVD9M02",
-  "M.BENZ FURGÃO - XQF1T86",
-  "M.BENZ 817 - PRA7C45",
-  "VW GOL - GHTR31",
-  "IVECO 130 - MSD2L9" 
-  
+  "FIAT/FIORINO - SBH4H88",
+  "PAJERO LUCIANO - OCG8657",
+  "M.BENZ 1016 - POI6D09",
+  "M.BENZ FURGÃO - POS3A77",
+  "M.BENZ 815 THE - RIJOE17",
+  "M.BENZ 815 VERMELHO - RQZ6F04",
+  "M.BENZ FURGÃO - SBT0D15",
+  "M.BENZ 817 - SOC4J52",
+  "VW GOL - OJU9697",
+  "IVECO 130 - OSK7870"
 ];
+
 /* ================= DETECTAR QR DO VEÍCULO ================= */
 function identificarVeiculo(){
 
