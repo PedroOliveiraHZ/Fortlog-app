@@ -160,14 +160,14 @@ function mostrarAba(id, event) {
 
 const carros = [
   "FIAT/FIORINO - BRA2D47",
-  "PAJERO SPORT - kLM8F21",
-  "M.BENZ 1016  - QWE3J59",
+  "PAJERO SPORT - KLM8F21",
+  "M.BENZ 1016 - QWE3J59",
   "M.BENZ FURGÃO - ZTR6A18",
   "M.BENZ 815 THE - HNP4K73",
   "M.BENZ 815 VERMELHO - LVD9M02",
   "M.BENZ FURGÃO - XQF1T86",
   "M.BENZ 817 - PRA7C45",
-  "VW GOL - GHTRR31",
+  "VW GOL - GHTR31",
   "IVECO 130 - MSD2L9" 
   
 ];
